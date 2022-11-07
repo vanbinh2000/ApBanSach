@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         data.add(new Books("asd","2000vnd", R.drawable.dunno, " How can we handle show more and show less functionality in main activity? i.e through on click listene"));
         data.add(new Books("ame","2000vnd", R.drawable.icantakeitanymore, " How can we handle show more and show less functionality in main activity? i.e through on click listene"));
         data.add(new Books("monke","2000vnd", R.drawable.monke, " How can we handle show more and show less functionality in main activity? i.e through on click listene"));
-        data.add(new Books("asd","2000vnd", R.drawable.dunno, " How can we handle show more and show less functionality in main activity? i.e through on click listene"));
+        data.add(new Books("asd","2000asdvnd", R.drawable.dunno, " How can we handle show more and show less functionality in main activity? i.e through on click listene"));
         data.add(new Books("asd","2000vnd", R.drawable.dunno, " How can we handle show more and show less functionality in main activity? i.e through on click listene"));
         data.add(new Books("ame","2000vnd", R.drawable.icantakeitanymore, " How can we handle show more and show less functionality in main activity? i.e through on click listene"));
         data.add(new Books("asd","2000vnd", R.drawable.dunno, " How can we handle show more and show less functionality in main activity? i.e through on click listene"));
