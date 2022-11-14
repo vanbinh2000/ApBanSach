@@ -1,52 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
-<HorizontalScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnAllTap"
-            android:layout_width="@dimen/ButtonTagWidth"
-            android:layout_height="wrap_content"
-            android:text="all"
-            android:layout_margin="10dp"
-            android:onClick="btnAllCategories"/>
-        <Button
-            android:id="@+id/btnasdTap"
-            android:layout_width="@dimen/ButtonTagWidth"
-            android:layout_height="wrap_content"
-            android:text="asd"
-            android:layout_margin="10dp"
-            android:onClick="btnAsdCategories"/>
-        <Button
-            android:id="@+id/btnMonkeTap"
-            android:layout_width="@dimen/ButtonTagWidth"
-            android:layout_height="wrap_content"
-            android:text="monke"
-            android:layout_margin="10dp"
-            android:onClick="btnMonkeCategories"/>
-        <Button
-            android:id="@+id/btnAmeTap"
-            android:layout_width="@dimen/ButtonTagWidth"
-            android:layout_height="wrap_content"
-            android:text="ame"
-            android:layout_margin="10dp"
-            android:onClick="btnAmeCategories"/>
-
-    </LinearLayout>
-</HorizontalScrollView>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listItem"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
-
-</LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

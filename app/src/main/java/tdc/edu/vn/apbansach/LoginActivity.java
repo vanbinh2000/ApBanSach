@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText txtMail, txtPass;
     FirebaseAuth mAuth;
     ImageView ivShowHideLoginPass;
+    public static final String SHARE_PREFS = "sharedPrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
+        checkRememberMe();
         ivShowHideLoginPass.setImageResource(R.drawable.hide);
         ivShowHideLoginPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +70,16 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void checkRememberMe() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARE_PREFS, MODE_PRIVATE);
+        String check = sharedPreferences.getString("name", "");
+        if (check.equals("true")){
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
+    }
+
     private void login() {
         String Email = txtMail.getText().toString().trim();
         String Pass = txtPass.getText().toString().trim();
@@ -76,6 +88,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARE_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("name", "true");
+                    editor.apply();
                     Toast.makeText(getApplicationContext(),"Login successful", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
