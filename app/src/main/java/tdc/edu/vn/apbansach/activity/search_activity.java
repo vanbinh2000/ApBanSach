@@ -32,6 +32,7 @@ public class search_activity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
        FindProducts();
+       finish();
 
 
     }

@@ -78,6 +78,7 @@ public class Activity_KhoaHoc extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_KhoaHoc.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

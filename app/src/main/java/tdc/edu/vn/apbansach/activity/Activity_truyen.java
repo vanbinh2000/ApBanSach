@@ -79,6 +79,7 @@ public class Activity_truyen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_truyen.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

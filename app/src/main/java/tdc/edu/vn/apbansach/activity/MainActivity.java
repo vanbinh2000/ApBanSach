@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         RunWiewLipper();
         actionOnclickItem();
 
+
     }
 
     public void RunWiewLipper() {
@@ -165,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(intent);
             return true;
         }
+
+
 
         return super.onOptionsItemSelected(item);
     }

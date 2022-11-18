@@ -60,6 +60,7 @@ public class Activity_detail extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_detail.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
