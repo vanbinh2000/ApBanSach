@@ -99,4 +99,10 @@
     </androidx.drawerlayout.widget.DrawerLayout>
 
 
+    tools:context=".activity.MainActivity">
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="profile"
+    android:id="@+id/btnProfile"/>
 </LinearLayout>
