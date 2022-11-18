@@ -1,8 +1,7 @@
-package tdc.edu.vn.apbansach;
+package tdc.edu.vn.apbansach.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,8 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
+import tdc.edu.vn.apbansach.R;
 import tdc.edu.vn.apbansach.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -152,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             if (task.isSuccessful()){
                                                 Toast.makeText(RegisterActivity.this, "SignUp successful", Toast.LENGTH_SHORT).show();
                                                 Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                               i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 startActivity(i);
                                                 finish();
                                             }

@@ -1,4 +1,4 @@
-package tdc.edu.vn.apbansach;
+package tdc.edu.vn.apbansach.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import tdc.edu.vn.apbansach.R;
 
 public class LoginActivity extends AppCompatActivity {
     TextView tvSignUp;
@@ -98,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
                 }
             }
         });
