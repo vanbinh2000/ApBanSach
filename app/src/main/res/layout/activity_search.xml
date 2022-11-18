@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.search_activity"
+    android:orientation="vertical"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#c2e9fb">
+
+        <SearchView
+            android:id="@+id/idsearchview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_view"
+            android:gravity="center"
+            android:queryHint="Search"
+
+            >
+
+        </SearchView>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/id_search_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>
