@@ -44,6 +44,7 @@ public class Activity_sachTH extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_sachTH.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
