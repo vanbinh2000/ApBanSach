@@ -4,49 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".activity.MainActivity"
     android:orientation="vertical">
-<HorizontalScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/iddrawer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnAllTap"
-            android:layout_width="@dimen/ButtonTagWidth"
-            android:layout_height="wrap_content"
-            android:text="all"
-            android:layout_margin="10dp"
-            android:onClick="btnAllCategories"/>
-        <Button
-            android:id="@+id/btnasdTap"
-            android:layout_width="@dimen/ButtonTagWidth"
-            android:layout_height="wrap_content"
-            android:text="asd"
-            android:layout_margin="10dp"
-            android:onClick="btnAsdCategories"/>
-        <Button
-            android:id="@+id/btnMonkeTap"
-            android:layout_width="@dimen/ButtonTagWidth"
-            android:layout_height="wrap_content"
-            android:text="monke"
-            android:layout_margin="10dp"
-            android:onClick="btnMonkeCategories"/>
-        <Button
-            android:id="@+id/btnAmeTap"
-            android:layout_width="@dimen/ButtonTagWidth"
-            android:layout_height="wrap_content"
-            android:text="ame"
-            android:layout_margin="10dp"
-            android:onClick="btnAmeCategories"/>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
-    </LinearLayout>
-</HorizontalScrollView>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listItem"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarmain"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="Home"
+                app:titleTextColor="#F44336"
+                android:background="#c2e9fb"
+
+
+                >
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <!--           <HorizontalScrollView-->
+            <!--               android:layout_width="match_parent"-->
+            <!--               android:layout_height="wrap_content"-->
+            <!--               >-->
+            <!--               <androidx.recyclerview.widget.RecyclerView-->
+            <!--                   android:id="@+id/recyclerview_categories"-->
+            <!--                   android:layout_width="match_parent"-->
+            <!--                   android:layout_height="wrap_content"-->
+
+            <!--                   ></androidx.recyclerview.widget.RecyclerView>-->
+
+            <!--           </HorizontalScrollView>-->
+
+
+            <ViewFlipper
+                android:id="@+id/viewflipper"
+                android:layout_width="match_parent"
+                android:layout_height="220dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/image_viewlippers"
+                    >
+
+                </ImageView>
+            </ViewFlipper>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#c2e9fb"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Products"
+                    android:textColor="#F44336"
+                    android:textSize="20dp"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    ></TextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+        </LinearLayout>
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/idnavigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            >
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/idlistview_menu"
+                ></ListView>
+
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 
 </LinearLayout>
