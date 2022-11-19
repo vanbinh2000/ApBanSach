@@ -32,6 +32,11 @@ public class Activity_detail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        productsID = getIntent().getStringExtra("productsID");
+        imageView_detail = findViewById(R.id.idimage_detail);
+        txtname_detail = findViewById(R.id.idname_detail);
+        txtdescription_detail = findViewById(R.id.idDescription_detail);
+        txtprice_detail = findViewById(R.id.idprice_detail);
         loadDetail(productsID);
         ActionBack();
     }
@@ -40,7 +45,7 @@ public class Activity_detail extends AppCompatActivity {
 
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Products");
-        databaseReference.child("products_id").addValueEventListener(new ValueEventListener() {
+        databaseReference.child(productsID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists())
