@@ -44,27 +44,11 @@ public class Activity_detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         loadDetail(productsID);
-        mAuth = FirebaseAuth.getInstance();
-        firebaseUser = mAuth.getCurrentUser();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Products");
-        loadDetail(productsID);
         ActionBack();
-        btnAddCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addedToCart();
-            }
-        });
-    }
-
-    private void addedToCart() {
     }
 
     public void loadDetail(String productsID)
     {
-
-
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Products");
         databaseReference.child("products_id").addValueEventListener(new ValueEventListener() {
             @Override
