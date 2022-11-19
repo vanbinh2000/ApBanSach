@@ -77,8 +77,6 @@ public class RecylerViewAdapter_Books extends RecyclerView.Adapter<RecylerViewAd
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("object_prodcts", books);
                 intent.putExtras(bundle);
-
-
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 

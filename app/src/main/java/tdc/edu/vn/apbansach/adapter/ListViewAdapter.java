@@ -16,7 +16,7 @@ import tdc.edu.vn.apbansach.R;
 import tdc.edu.vn.apbansach.model.Categories;
 
 public class ListViewAdapter extends BaseAdapter {
-    private ArrayList<Categories> datalist ;
+    private ArrayList<Categories> datalist;
     private Context context;
     private int layout;
 
@@ -33,7 +33,7 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        if(position < 0)
+        if (position < 0)
             return null;
 
         return datalist.get(position);
@@ -43,8 +43,8 @@ public class ListViewAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
-    private class ViewHolder
-    {
+
+    private class ViewHolder {
         TextView txtname_categories;
         ImageView imageView_cate;
     }
@@ -52,8 +52,7 @@ public class ListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        if(convertView == null)
-        {
+        if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(layout, null);
             viewHolder = new ViewHolder();
@@ -62,8 +61,7 @@ public class ListViewAdapter extends BaseAdapter {
 
             convertView.setTag(viewHolder);
 
-        }
-        else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
 
         }
@@ -72,7 +70,6 @@ public class ListViewAdapter extends BaseAdapter {
                 .fit()
                 .centerCrop()
                 .into(viewHolder.imageView_cate);
-
 
 
         return convertView;

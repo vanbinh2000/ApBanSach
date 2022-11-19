@@ -1,15 +1,14 @@
 package tdc.edu.vn.apbansach.model;
 
 public class User {
-    String Email, Fullname, Password;
+    String Email, Fullname;
 
     public User() {
     }
 
-    public User(String email, String fullname, String password) {
+    public User(String email, String fullname) {
         Email = email;
         Fullname = fullname;
-        Password = password;
     }
 
     public String getEmail() {
@@ -28,11 +27,4 @@ public class User {
         Fullname = fullname;
     }
 
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
 }
