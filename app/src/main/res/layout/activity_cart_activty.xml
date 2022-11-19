@@ -6,4 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".activity.CartActivty">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCartView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvThanhtien"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="15dp"
+        android:text="Thanh tien:"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnThanhToan"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvThanhtien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 Đ"
+        android:textSize="30sp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnThanhToan"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+        android:id="@+id/btnThanhToan"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Thanh toan"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        android:background="@android:color/holo_red_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
