@@ -154,17 +154,23 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
 
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.idsearch) {
             Intent intent = new Intent(MainActivity.this, search_activity.class);
             this.startActivity(intent);
             return true;
+        }
+        else if(id == R.id.idperson)
+        {
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            this.startActivity(intent);
+            return  true;
         }
 
 
