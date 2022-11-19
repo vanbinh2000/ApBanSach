@@ -31,6 +31,7 @@ public class CartActivty extends AppCompatActivity {
     FirebaseAuth mAuth;
     Button btnThanhtoan;
     TextView tvThanhtien;
+    int amount =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +39,49 @@ public class CartActivty extends AppCompatActivity {
         setContentView(R.layout.activity_cart_activty);
         mAuth = FirebaseAuth.getInstance();
         setControl();
-        setEvent();
+        displayCartItem();
+        totalAmount();
     }
 
-    private void setEvent() {
-        displayCartItem();
+    private void totalAmount() {
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference = firebaseDatabase.getReference();
+        DatabaseReference userID = reference.child("Cart").child(mAuth.getCurrentUser().getUid());
+        userID.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot productSnapshot : snapshot.getChildren()){
+                    String productID = productSnapshot.getKey().trim();
+                    DatabaseReference productRef = reference.child("Products");
+                    productRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                if (dataSnapshot.getKey().equals(productID)) {
+                                    Products products = dataSnapshot.getValue(Products.class);
+                                    amount = amount + Integer.parseInt(products.getPrice().trim());
+
+                                }
+                            } tvThanhtien.setText(Integer.toString(amount));
+                        }
+
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
+
 
     private void displayCartItem() {
         productsArrayList = new ArrayList<>();
