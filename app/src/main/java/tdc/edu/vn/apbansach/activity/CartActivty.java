@@ -32,7 +32,7 @@ public class CartActivty extends AppCompatActivity {
     FirebaseAuth mAuth;
     Button btnThanhtoan;
     TextView tvThanhtien;
-    int amount =0;
+    int amount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,30 +49,39 @@ public class CartActivty extends AppCompatActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference();
         DatabaseReference userID = reference.child("Cart").child(mAuth.getCurrentUser().getUid());
+        DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
         userID.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot productSnapshot : snapshot.getChildren()){
+                if (!snapshot.exists()) {
                     amount = 0;
-                    String productID = productSnapshot.getKey().trim();
-                    DatabaseReference productRef = reference.child("Products");
-                    productRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                if (dataSnapshot.getKey().equals(productID)) {
-                                    Products products = dataSnapshot.getValue(Products.class);
-                                    amount = amount + Integer.parseInt(products.getPrice().trim());
-                                }
-                            }
-                            DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
-                            tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
+                } else {
+                    for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                        amount = 0;
+                        String productID = productSnapshot.getKey().trim();
+                        DatabaseReference productRef = reference.child("Products");
+                        productRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                        }
-                    });
+                                    if (dataSnapshot.getKey().equals(productID)) {
+                                        Products products = dataSnapshot.getValue(Products.class);
+                                        amount = amount + Integer.parseInt(products.getPrice().trim());
+                                    }
+                                    tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
+                                }
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
                 }
             }
 
@@ -114,18 +123,21 @@ public class CartActivty extends AppCompatActivity {
                             }
                             recyclerViewAdapter_cart.notifyDataSetChanged();
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         };
         userID.addListenerForSingleValueEvent(valueEventListener);
     }
+
     private void setControl() {
         tvThanhtien = findViewById(R.id.tvThanhtien);
     }
