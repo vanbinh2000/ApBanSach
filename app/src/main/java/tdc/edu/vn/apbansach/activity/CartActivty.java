@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class CartActivty extends AppCompatActivity {
     RecyclerViewAdapter_Cart recyclerViewAdapter_cart;
     FirebaseAuth mAuth;
     Button btnThanhtoan;
-    TextView tvThanhtien;
+    TextView tvThanhtien, tvEmpty;
     int amount = 0;
 
     @Override
@@ -54,6 +55,7 @@ public class CartActivty extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
+                    tvEmpty.setVisibility(View.VISIBLE);
                     amount = 0;
                     tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
                 } else {
@@ -140,5 +142,6 @@ public class CartActivty extends AppCompatActivity {
 
     private void setControl() {
         tvThanhtien = findViewById(R.id.tvThanhtien);
+        tvEmpty = findViewById(R.id.tvEmpty);
     }
 }

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.CartActivty"
     android:background="@color/white">
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCartView"
         android:layout_width="0dp"
@@ -22,6 +21,7 @@
         android:layout_marginBottom="15dp"
         android:text="Thành tiền:"
         android:textSize="30sp"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/btnThanhToan"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -34,7 +34,8 @@
         android:layout_marginRight="25dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/btnThanhToan"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#000000"/>
     <Button
         android:id="@+id/btnThanhToan"
         android:layout_width="match_parent"
@@ -46,4 +47,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emptier than the void"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold|italic"
+        android:textColor="#000000"
+        android:id="@+id/tvEmpty"
+        android:textSize="30sp"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
