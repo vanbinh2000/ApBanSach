@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="nguyen thi A"
-            android:textSize="15sp"
+            android:textSize="20sp"
             ></TextView>
     </LinearLayout>
     <LinearLayout
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="150.000đ "
-            android:textStyle="bold"
+
             android:textSize="20sp"
             android:id="@+id/idtotalprice_payment"
             ></TextView>
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:text="22/11/2022"
             android:textSize="20sp"
-            android:textStyle="bold"
+
             android:id="@+id/iddate_payment"
             ></TextView>
     </LinearLayout>

@@ -131,14 +131,12 @@ public class CartActivty extends AppCompatActivity {
                             }
                             recyclerViewAdapter_cart.notifyDataSetChanged();
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -153,14 +151,13 @@ public class CartActivty extends AppCompatActivity {
 
 
     }
-
-    public void setBtnAddPayment() {
-        btnThanhtoan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CartActivty.this, Activity_payment.class);
-                startActivity(intent);
-                nextDataActivity();
+    public void setBtnAddPayment()
+    {
+      btnThanhtoan.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Intent intent = new Intent(CartActivty.this, Activity_payment.class);
+              startActivity(intent);
 
             }
         });

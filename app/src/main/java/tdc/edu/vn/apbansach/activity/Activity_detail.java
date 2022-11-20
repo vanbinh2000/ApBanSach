@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import java.util.HashMap;
 
 import tdc.edu.vn.apbansach.R;
 import tdc.edu.vn.apbansach.model.Cart;
+import tdc.edu.vn.apbansach.model.Payment;
 import tdc.edu.vn.apbansach.model.Products;
 
 public class Activity_detail extends AppCompatActivity {
@@ -39,27 +42,40 @@ public class Activity_detail extends AppCompatActivity {
    private TextView txtprice_detail;
    private ImageView imageView_back;
    private String productsID = "";
+   private  String priceProducts= "";
    private Button btnAddCart;
    private FirebaseAuth mAuth;
+   private Button btnBuynow;
    private FirebaseDatabase firebaseDatabase;
+   private Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        mAuth =FirebaseAuth.getInstance();
+
+        mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         productsID = getIntent().getStringExtra("productsID");
+        priceProducts = getIntent().getStringExtra("priceProducts");
         imageView_detail = findViewById(R.id.idimage_detail);
         txtname_detail = findViewById(R.id.idname_detail);
         txtdescription_detail = findViewById(R.id.idDescription_detail);
         txtprice_detail = findViewById(R.id.idprice_detail);
         btnAddCart = findViewById(R.id.btnAddCart);
+        btnBuynow = findViewById(R.id.idbuynow);
         loadDetail(productsID);
+        setgetSpinner();
         ActionBack();
         btnAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                     addToCart();
+            }
+        });
+        btnBuynow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadBuyNow();
             }
         });
     }
@@ -124,6 +140,51 @@ public class Activity_detail extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    public void loadBuyNow()
+    {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String savedate = simpleDateFormat.format(calendar.getTime());
+
+        int quantity = Integer.parseInt(spinner.getSelectedItem().toString());
+        long total_price = quantity *Integer.valueOf(priceProducts.trim());
+        DecimalFormat decimalFormat = new DecimalFormat("#,###,###Đ");
+
+
+        String UserID = mAuth.getCurrentUser().getUid();
+        Payment payment = new Payment(UserID, productsID, priceProducts, String.valueOf(quantity), savedate);
+        final  HashMap<String, Object>paymentlist = new HashMap<>();
+        paymentlist.put("userid", payment.getUserid());
+        paymentlist.put("productid", payment.getProductsid());
+        paymentlist.put("quantity", quantity);
+        paymentlist.put("total_price",  decimalFormat.format(total_price));
+        paymentlist.put("datepayment", savedate);
+
+
+        FirebaseDatabase.getInstance().getReference("Payment").child(mAuth.getCurrentUser().getUid()).child(productsID)
+                .setValue(paymentlist).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(Activity_detail.this, "successfull buy", Toast.LENGTH_SHORT).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Activity_detail.this, "Not successfull buy", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+    public void  setgetSpinner()
+
+    {
+        spinner = findViewById(R.id.idSpinner);
+        Integer [] total = new Integer[]{1,2,3,4,5,6,7,8,9,10};
+        ArrayAdapter<Integer> lisintegers = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item, total);
+        spinner.setAdapter(lisintegers);
+
     }
 
 }
