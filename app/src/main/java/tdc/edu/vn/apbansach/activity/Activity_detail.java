@@ -105,10 +105,8 @@ public class Activity_detail extends AppCompatActivity {
                     txtprice_detail.setText(decimalFormat.format(Integer.valueOf(products.getPrice().trim())) + " Đ");
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 

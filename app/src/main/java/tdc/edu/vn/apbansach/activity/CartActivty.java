@@ -77,17 +77,13 @@ public class CartActivty extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
                                     if (dataSnapshot.getKey().equals(productID)) {
                                         Products products = dataSnapshot.getValue(Products.class);
                                         amount = amount + Integer.parseInt(products.getPrice().trim());
                                     }
                                     tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
                                 }
-
-
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -157,22 +153,22 @@ public class CartActivty extends AppCompatActivity {
 
 
     }
-    public void setBtnAddPayment()
-    {
-      btnThanhtoan.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              Intent intent = new Intent(CartActivty.this, Activity_payment.class);
-              startActivity(intent);
-           nextDataActivity();
 
-          }
-      });
+    public void setBtnAddPayment() {
+        btnThanhtoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CartActivty.this, Activity_payment.class);
+                startActivity(intent);
+                nextDataActivity();
+
+            }
+        });
 
     }
 
     private void nextDataActivity() {
-       Intent intent = new Intent(CartActivty.this, Activity_payment.class);
-       this.startActivity(intent);
+        Intent intent = new Intent(CartActivty.this, Activity_payment.class);
+        this.startActivity(intent);
     }
 }
