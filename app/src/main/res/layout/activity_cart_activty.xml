@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CartActivty">
+    tools:context=".activity.CartActivty"
+    android:background="@color/white">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCartView"
@@ -14,13 +15,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginBottom="15dp"
-        android:text="Thanh tien:"
+        android:text="Thành tiền:"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/btnThanhToan"
         app:layout_constraintStart_toStartOf="parent" />
@@ -39,7 +39,7 @@
         android:id="@+id/btnThanhToan"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="Thanh toan"
+        android:text="Thanh toán"
         android:textAllCaps="false"
         android:textSize="30sp"
         android:background="@android:color/holo_red_light"

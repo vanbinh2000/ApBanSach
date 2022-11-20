@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ProfileActivity">
+    tools:context=".activity.ProfileActivity"
+    android:background="@color/white">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:background="#0bede7">
+        android:background="#c2e9fb">
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="140dp"
@@ -21,7 +22,7 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:background="#ffffff"
-                android:src="@drawable/add_photo"/>
+                android:src="@drawable/user"/>
         </androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/tvUserNameInfo"
