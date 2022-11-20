@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,9 +25,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import tdc.edu.vn.apbansach.R;
 import tdc.edu.vn.apbansach.adapter.RecyclerViewAdapter_Cart;
+import tdc.edu.vn.apbansach.model.Cart;
+import tdc.edu.vn.apbansach.model.Payment;
 import tdc.edu.vn.apbansach.model.Products;
 
 public class CartActivty extends AppCompatActivity {
@@ -35,6 +42,8 @@ public class CartActivty extends AppCompatActivity {
     TextView tvThanhtien, tvEmpty;
     int amount = 0;
 
+    DatabaseReference fbProducts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +52,7 @@ public class CartActivty extends AppCompatActivity {
         setControl();
         displayCartItem();
         totalAmount();
+        setBtnAddPayment();
     }
 
     private void totalAmount() {
@@ -143,5 +153,26 @@ public class CartActivty extends AppCompatActivity {
     private void setControl() {
         tvThanhtien = findViewById(R.id.tvThanhtien);
         tvEmpty = findViewById(R.id.tvEmpty);
+        btnThanhtoan = findViewById(R.id.btnThanhToan);
+
+
+    }
+    public void setBtnAddPayment()
+    {
+      btnThanhtoan.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Intent intent = new Intent(CartActivty.this, Activity_payment.class);
+              startActivity(intent);
+           nextDataActivity();
+
+          }
+      });
+
+    }
+
+    private void nextDataActivity() {
+       Intent intent = new Intent(CartActivty.this, Activity_payment.class);
+       this.startActivity(intent);
     }
 }

@@ -114,14 +114,6 @@ public class Activity_detail extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent i = new Intent(Activity_detail.this, MainActivity.class);
-        startActivity(i);
-        finish();
-    }
-
     public void ActionBack()
     {
         imageView_back = findViewById(R.id.idImage_back);
@@ -135,4 +127,5 @@ public class Activity_detail extends AppCompatActivity {
             }
         });
     }
+
 }
