@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item  android:id="@+id/idPayment"
+        android:icon="@drawable/ic_baseline_payment_24"
+        android:title="Search data"
+        app:showAsAction="always" ></item>
     <item
         android:id="@+id/idCart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
@@ -16,5 +20,6 @@
         android:icon="@drawable/ic_baseline_search_24"
         android:title="Search data"
         app:showAsAction="always"></item>
+
 
 </menu>
