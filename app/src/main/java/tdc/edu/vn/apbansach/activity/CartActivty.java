@@ -150,7 +150,6 @@ public class CartActivty extends AppCompatActivity {
           public void onClick(View v) {
               Intent intent = new Intent(CartActivty.this, Activity_payment.class);
               startActivity(intent);
-           nextDataActivity();
 
           }
       });

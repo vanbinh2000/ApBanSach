@@ -32,61 +32,63 @@ public class Activity_payment extends AppCompatActivity {
     FirebaseAuth mAuth;
     ArrayList<Products> productsArrayList;
     RecyclerviewPayment recyclerViewAdapterpayment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         mAuth = FirebaseAuth.getInstance();
-        displayCartItem();
+        //displayCartItemPayment();
         setControl();
 
     }
-    public void setControl()
-    {
+
+    public void setControl() {
         txtfullname = findViewById(R.id.idname_payment);
         txtTotal_price = findViewById(R.id.idtotalprice_payment);
         txtDatepayment = findViewById(R.id.iddate_payment);
     }
-    private void displayCartItem() {
-        productsArrayList = new ArrayList<>();
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerCartView);
-        recyclerViewAdapterpayment = new RecyclerviewPayment(productsArrayList, this, R.layout.listview_payment);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(recyclerViewAdapterpayment);
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference reference = firebaseDatabase.getReference();
-        DatabaseReference userID = reference.child("Cart").child(mAuth.getCurrentUser().getUid());
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
-                    String productsID = productSnapshot.getKey().trim();
-                    DatabaseReference productRef = reference.child("Products");
-                    productRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                                if (dataSnapshot.getKey().equals(productsID)) {
-                                    Products products = dataSnapshot.getValue(Products.class);
-                                    productsArrayList.add(products);
-                                    Log.d("TAG", dataSnapshot.getKey());
-                                }
-                            }
-                            recyclerViewAdapterpayment.notifyDataSetChanged();
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        };
-        userID.addListenerForSingleValueEvent(valueEventListener);
-    }
+//    private void displayCartItemPayment() {
+//        productsArrayList = new ArrayList<>();
+//        recyclerView = (RecyclerView) findViewById(R.id.recyclerCartView);
+//        recyclerviewPayment = new RecyclerviewPayment(productsArrayList, this, R.layout.listview_payment);
+//        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
+//        layoutManager.setOrientation(RecyclerView.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setAdapter(recyclerViewAdapterpayment);
+//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//        DatabaseReference reference = firebaseDatabase.getReference();
+//        DatabaseReference userID = reference.child("Payment").child(mAuth.getCurrentUser().getUid());
+//        ValueEventListener valueEventListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+//                    String productsID = productSnapshot.getKey().trim();
+//                    DatabaseReference productRef = reference.child("Products");
+//                    productRef.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//
+//                                if (dataSnapshot.getKey().equals(productsID)) {
+//                                    Products products = dataSnapshot.getValue(Products.class);
+//                                    productsArrayList.add(products);
+//                                    Log.d("TAG", dataSnapshot.getKey());
+//                                }
+//                            }
+//                            recyclerViewAdapterpayment.notifyDataSetChanged();
+//                        }
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//                        }
+//                    });
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        };
+//        userID.addListenerForSingleValueEvent(valueEventListener);
+//    }
+//}
 }
