@@ -74,6 +74,7 @@ public class RecylerViewAdapter_Books extends RecyclerView.Adapter<RecylerViewAd
             public void onClick(View v) {
                 Intent intent = new Intent(context, Activity_detail.class);
                 intent.putExtra("productsID", books.getProducts_id());
+                intent.putExtra("priceProducts", books.getPrice());
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);

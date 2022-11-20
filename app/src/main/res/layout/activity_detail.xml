@@ -83,6 +83,30 @@
                 android:paddingTop="10dp"
                 android:text="15000đ"
                 android:textSize="25sp"></TextView>
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số Lượng : "
+                    android:textSize="20sp"
+                    ></TextView>
+                <Spinner
+                    android:padding="10dp"
+                    android:id="@+id/idSpinner"
+                    android:paddingLeft="10dp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinner"
+
+                    ></Spinner>
+            </LinearLayout>
 
             <TextView
                 android:paddingTop="10dp"
@@ -121,6 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Buy Now"
+                android:id="@+id/idbuynow"
 
 
                 >
