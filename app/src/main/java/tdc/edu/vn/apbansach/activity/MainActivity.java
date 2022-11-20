@@ -172,6 +172,11 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(intent);
             return  true;
         }
+        else if (id == R.id.idCart){
+            Intent i = new Intent(MainActivity.this, CartActivty.class);
+            this.startActivity(i);
+            return true;
+        }
 
 
 

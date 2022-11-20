@@ -38,8 +38,12 @@
                 android:text="Gia sach 1"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:id="@+id/idPrice_books"
-                />
+                android:id="@+id/idPrice_books" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xóa"
+                android:id="@+id/btnRemove"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

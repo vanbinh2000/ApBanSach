@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import tdc.edu.vn.apbansach.R;
@@ -52,6 +53,7 @@ public class CartActivty extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot productSnapshot : snapshot.getChildren()){
+                    amount = 0;
                     String productID = productSnapshot.getKey().trim();
                     DatabaseReference productRef = reference.child("Products");
                     productRef.addValueEventListener(new ValueEventListener() {
@@ -61,12 +63,11 @@ public class CartActivty extends AppCompatActivity {
                                 if (dataSnapshot.getKey().equals(productID)) {
                                     Products products = dataSnapshot.getValue(Products.class);
                                     amount = amount + Integer.parseInt(products.getPrice().trim());
-
                                 }
-                            } tvThanhtien.setText(Integer.toString(amount));
+                            }
+                            DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
+                            tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
                         }
-
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
@@ -99,7 +100,6 @@ public class CartActivty extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot productSnapshot : snapshot.getChildren()) {
                     String productsID = productSnapshot.getKey().trim();
-//                    Log.d("TAG", productsID);
                     DatabaseReference productRef = reference.child("Products");
                     productRef.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -116,7 +116,6 @@ public class CartActivty extends AppCompatActivity {
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
                         }
                     });
                 }
