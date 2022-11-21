@@ -30,7 +30,7 @@
                 android:paddingLeft="10dp"
                 android:id="@+id/idname_payment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:text="Ten Sach "
                 android:textSize="15sp"></TextView>
         </LinearLayout>

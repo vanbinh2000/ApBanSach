@@ -163,8 +163,5 @@ public class CartActivty extends AppCompatActivity {
 
     }
 
-    private void nextDataActivity() {
-        Intent intent = new Intent(CartActivty.this, Activity_payment.class);
-        this.startActivity(intent);
-    }
+
 }
