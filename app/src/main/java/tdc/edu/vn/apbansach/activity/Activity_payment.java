@@ -67,6 +67,7 @@ public class Activity_payment extends AppCompatActivity {
             }
         });
         displayCartItemPayment();
+
         txtTotal_price();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -75,6 +76,7 @@ public class Activity_payment extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Task<Void> reference = firebaseDatabase.getReference("Cart").child(mAuth.getCurrentUser().getUid())
                         .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -184,4 +186,5 @@ public class Activity_payment extends AppCompatActivity {
         };
         userID.addListenerForSingleValueEvent(valueEventListener);
     }
+
 }

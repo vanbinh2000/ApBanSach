@@ -69,6 +69,7 @@ public class CartActivty extends AppCompatActivity {
                 if (!snapshot.exists()) {
                     tvEmpty.setVisibility(View.VISIBLE);
                     amount = 0;
+                    btnThanhtoan.setClickable(false);
                     tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
                 } else {
                     for (DataSnapshot productSnapshot : snapshot.getChildren()) {
@@ -163,8 +164,5 @@ public class CartActivty extends AppCompatActivity {
 
     }
 
-    private void nextDataActivity() {
-        Intent intent = new Intent(CartActivty.this, Activity_payment.class);
-        this.startActivity(intent);
-    }
+
 }

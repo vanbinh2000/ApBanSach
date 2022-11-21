@@ -91,12 +91,12 @@ public class Activity_detail extends AppCompatActivity {
                 .setValue(cart).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(Activity_detail.this, "ok", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Activity_detail.this, "Thêm vào giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Activity_detail.this, "ko dc", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
@@ -149,7 +149,7 @@ public class Activity_detail extends AppCompatActivity {
         String savedate = simpleDateFormat.format(calendar.getTime());
 
         int quantity = Integer.parseInt(spinner.getSelectedItem().toString());
-        long total_price = quantity *Integer.valueOf(priceProducts.trim());
+        long total_price = quantity * Integer.valueOf(priceProducts.trim());
         DecimalFormat decimalFormat = new DecimalFormat("#,###,###Đ");
 
 
@@ -176,6 +176,14 @@ public class Activity_detail extends AppCompatActivity {
                         Toast.makeText(Activity_detail.this, "Not successfull buy", Toast.LENGTH_SHORT).show();
                     }
                 });
+        Intent intent = new Intent(this, Activity_Bill.class);
+        intent.putExtra("quantity", payment.getQuantity());
+        intent.putExtra("totalprice", payment.getTotal_price());
+        intent.putExtra("datepayment", payment.getDatepayment());
+
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(intent);
 
     }
     public void  setgetSpinner()
@@ -187,5 +195,9 @@ public class Activity_detail extends AppCompatActivity {
         spinner.setAdapter(lisintegers);
 
     }
+
+
+
+
 
 }

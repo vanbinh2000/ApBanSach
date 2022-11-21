@@ -179,12 +179,7 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(i);
             return true;
         }
-        else if(id == R.id.idPayment)
-        {
-            Intent intent = new Intent (MainActivity.this, Activity_payment.class);
-            this.startActivity(intent);
-            return  true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 

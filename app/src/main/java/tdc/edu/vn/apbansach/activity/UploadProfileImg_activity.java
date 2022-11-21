@@ -89,7 +89,7 @@ public class UploadProfileImg_activity extends AppCompatActivity {
                             UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                                     .setPhotoUri(download).build();
                             firebaseUser.updateProfile(profileChangeRequest);
-                            Toast.makeText(UploadProfileImg_activity.this, "xong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UploadProfileImg_activity.this, "Thành công", Toast.LENGTH_SHORT).show();
                         }
                     });
                     progressBar.setVisibility(View.GONE);
