@@ -43,7 +43,7 @@
         >
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="270dp"
+            android:layout_height="310dp"
             android:id="@+id/idRecyclerview_payment"
             ></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
@@ -101,6 +101,7 @@
     android:id="@+id/btnBackPayment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textSize="30sp"
     android:text="Thanh toán"
     android:background="@android:color/holo_red_light"
     />
