@@ -50,7 +50,12 @@ public class UploadProfileImg_activity extends AppCompatActivity {
         firebaseUser = mAuth.getCurrentUser();
         storage = FirebaseStorage.getInstance().getReference("ProfileDisplayImg");
         Uri uri = firebaseUser.getPhotoUrl();
+        if (uri == null){
+            imgUpload.setImageResource(R.drawable.user);
+        }
+        else{
         Picasso.get().load(uri).into(imgUpload);
+        }
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
