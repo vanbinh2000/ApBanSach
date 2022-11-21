@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -86,6 +88,26 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         String Email = txtMail.getText().toString().trim();
         String Pass = txtPass.getText().toString().trim();
+        if (TextUtils.isEmpty(Email)) {
+            txtMail.setError("Email is required!");
+            txtMail.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(Pass)) {
+            txtPass.setError("Password is required!");
+            txtPass.requestFocus();
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+            txtMail.setError("Please provide valid email!");
+            txtMail.requestFocus();
+            return;
+        }
+        if (Pass.length() < 6) {
+            txtPass.setError("Min password length shound be 6");
+            txtPass.requestFocus();
+            return;
+        }
 
         mAuth.signInWithEmailAndPassword(Email, Pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

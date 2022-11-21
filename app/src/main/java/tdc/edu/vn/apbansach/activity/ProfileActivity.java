@@ -72,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
                     tvUsername.setText(name);
                     Uri uri = user.getPhotoUrl();
                     if (uri == null) {
-                        ivUser.setImageResource(R.drawable.add_photo);
+                        ivUser.setImageResource(R.drawable.user);
                     } else {
                         Picasso.get().load(uri).into(ivUser);
                     }
@@ -88,6 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ProfileActivity.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 finish();
             }
@@ -96,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ProfileActivity.this, EditProfileActivity.class);
-                i.setFlags(i.FLAG_ACTIVITY_NEW_TASK | i.FLAG_ACTIVITY_CLEAR_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 finish();
             }

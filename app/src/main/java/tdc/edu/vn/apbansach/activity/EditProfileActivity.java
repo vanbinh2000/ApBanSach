@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -46,9 +48,6 @@ public class EditProfileActivity extends AppCompatActivity {
     String name, email;
     StorageReference storage;
     ProgressBar progressBar;
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private Uri uriImg;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,7 @@ public class EditProfileActivity extends AppCompatActivity {
         Uri uri = firebaseUser.getPhotoUrl();
         showProfile(firebaseUser);
         if (uri == null) {
-            ivUser.setImageResource(R.drawable.add_photo);
+            ivUser.setImageResource(R.drawable.user);
         } else {
             Picasso.get().load(uri).into(ivUser);
         }
@@ -72,74 +71,41 @@ public class EditProfileActivity extends AppCompatActivity {
         ivUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFile();
+                Intent i = new Intent(EditProfileActivity.this, UploadProfileImg_activity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
             }
         });
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateProfile(firebaseUser);
-                uploadPic();
                 Intent i = new Intent(EditProfileActivity.this, ProfileActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
-
-        ivUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openFile();
-            }
-        });
-    }
-
-    private void uploadPic() {
-        if (uriImg != null) {
-            StorageReference storageReference = storage.child(mAuth.getCurrentUser().getUid() + "." + getFileExtension(uriImg));
-            storageReference.putFile(uriImg).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            Uri download = uri;
-                            firebaseUser = mAuth.getCurrentUser();
-                            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                                    .setPhotoUri(download).build();
-                            firebaseUser.updateProfile(profileChangeRequest);
-                        }
-                    });
-                }
-            });
-        }
-    }
-
-    private String getFileExtension(Uri uriImg) {
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uriImg));
-    }
-
-    private void openFile() {
-        Intent i = new Intent();
-        i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(i, PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            uriImg = data.getData();
-            ivUser.setImageURI(uriImg);
-        }
     }
 
     private void updateProfile(FirebaseUser firebaseUser) {
         name = etUsername.getText().toString();
         email = etEmail.getText().toString();
+        if (TextUtils.isEmpty(name)) {
+            etUsername.setError("Email is required!");
+            etUsername.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(email)) {
+            etEmail.setError("Password is required!");
+            etEmail.requestFocus();
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError("Please provide valid email!");
+            etEmail.requestFocus();
+            return;
+        }
         User userModel = new User(email, name);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         String userID = mAuth.getUid();
