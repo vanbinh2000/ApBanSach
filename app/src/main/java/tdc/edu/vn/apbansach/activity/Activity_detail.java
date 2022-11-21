@@ -91,12 +91,12 @@ public class Activity_detail extends AppCompatActivity {
                 .setValue(cart).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(Activity_detail.this, "ok", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Activity_detail.this, "Thêm vào giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Activity_detail.this, "ko dc", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
@@ -181,6 +181,7 @@ public class Activity_detail extends AppCompatActivity {
         intent.putExtra("totalprice", payment.getTotal_price());
         intent.putExtra("datepayment", payment.getDatepayment());
 
+
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
 
@@ -194,6 +195,8 @@ public class Activity_detail extends AppCompatActivity {
         spinner.setAdapter(lisintegers);
 
     }
+
+
 
 
 
