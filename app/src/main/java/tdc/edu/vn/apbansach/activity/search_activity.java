@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +27,7 @@ public class search_activity extends AppCompatActivity {
     ArrayList<Products>listProducts;
     RecylerViewAdapter_Books recylerViewAdapter_books;
     SearchView searchView;
+    String temp = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class search_activity extends AppCompatActivity {
 
     {
         searchView =(SearchView) findViewById(R.id.idsearchview);
+
         searchView.clearFocus();
         listProducts = new ArrayList<>();
         recyclerViewSearch =(RecyclerView) findViewById(R.id.id_search_items);
@@ -47,6 +50,7 @@ public class search_activity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this,1);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerViewSearch.setLayoutManager(layoutManager);
+        recyclerViewSearch.setVisibility(View.GONE);
         recyclerViewSearch.setAdapter(recylerViewAdapter_books);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         Query databaseReference = firebaseDatabase.getReference().child("Products");
@@ -76,7 +80,11 @@ public class search_activity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                recyclerViewSearch.setVisibility(View.VISIBLE);
+                if(newText.equals(""))
+                {
+                    recyclerViewSearch.setVisibility(View.GONE);
+                }
                 filterList(newText);
                 return false;
             }
@@ -93,7 +101,7 @@ public class search_activity extends AppCompatActivity {
         }
         if(filteredlist.isEmpty())
         {
-            // Toast.makeText(this, "Khong tim thay sach", Toast.LENGTH_SHORT).show();
+
         }
         else
         {
