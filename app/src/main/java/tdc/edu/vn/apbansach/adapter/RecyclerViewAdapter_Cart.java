@@ -68,7 +68,7 @@ public class RecyclerViewAdapter_Cart extends RecyclerView.Adapter<RecyclerViewA
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     bookslist.remove(books);
-                                    Toast.makeText(context, "thanh cong", Toast.LENGTH_SHORT).show();
+
                                 }notifyDataSetChanged();
                             }
                         });
