@@ -1,6 +1,7 @@
 package tdc.edu.vn.apbansach.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -8,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -116,10 +118,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
-//
+
+    //
 //    public void displayCategories() {
 //        listCategories = new ArrayList<>();
 //        recyclerView = findViewById(R.id.recyclerview_categories);
@@ -163,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.idsearch) {
             Intent intent = new Intent(MainActivity.this, search_activity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             this.startActivity(intent);
             return true;
         }
@@ -183,9 +185,6 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(intent);
             return  true;
         }
-
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -203,10 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
-
     }
-
     public void listViewMenu() {
         listCategories = new ArrayList<>();
         listView_menu = findViewById(R.id.idlistview_menu);
@@ -222,16 +218,33 @@ public class MainActivity extends AppCompatActivity {
                     listCategories.add(categories);
                 }
                 listviewAdapter.notifyDataSetChanged();
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+    }
 
+    @Override
+    public void onBackPressed() {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Notice");
+        builder.setMessage("Do you want to exit the application?");
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finishAffinity();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder.create().show();
     }
 
     public void actionOnclickItem() {
@@ -250,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         Intent intent1 = new Intent(MainActivity.this, Activity_KhoaHoc.class);
                         intent1.putExtra("id_categories_2", listCategories.get(position).getCategories_id());
+                        intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent1);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
@@ -257,20 +271,19 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         Intent intent2 = new Intent(MainActivity.this, Activity_KinhDoanh.class);
                         intent2.putExtra("id_categories_3", listCategories.get(position).getCategories_id());
+                        intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent2);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case 3:
                         Intent intent3 = new Intent(MainActivity.this, Activity_truyen.class);
                         intent3.putExtra("id_categories_4", listCategories.get(position).getCategories_id());
+                        intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent3);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-
                 }
             }
-
-
         });
     }
 

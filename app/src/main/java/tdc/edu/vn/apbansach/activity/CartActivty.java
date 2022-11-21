@@ -23,8 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import tdc.edu.vn.apbansach.R;
@@ -56,7 +59,6 @@ public class CartActivty extends AppCompatActivity {
     }
 
     private void totalAmount() {
-
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference();
         DatabaseReference userID = reference.child("Cart").child(mAuth.getCurrentUser().getUid());
@@ -92,10 +94,8 @@ public class CartActivty extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -122,7 +122,6 @@ public class CartActivty extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
                                 if (dataSnapshot.getKey().equals(productsID)) {
                                     Products products = dataSnapshot.getValue(Products.class);
                                     productsArrayList.add(products);
