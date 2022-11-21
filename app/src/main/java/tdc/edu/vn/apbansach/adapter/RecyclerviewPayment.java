@@ -47,6 +47,11 @@ public class RecyclerviewPayment extends RecyclerView.Adapter<RecyclerviewPaymen
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return resource;
+    }
+
+    @Override
     public int getItemCount() {
         return list.size();
     }

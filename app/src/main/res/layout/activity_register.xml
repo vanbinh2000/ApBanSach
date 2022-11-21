@@ -48,7 +48,7 @@
         android:drawableStart="@drawable/ic_baseline_perm_identity_24"
         android:drawablePadding="12dp"
         android:hint="Fullname"
-        android:maxLines="1"
+        android:singleLine="true"
         android:paddingStart="12dp"
         android:paddingEnd="9dp"
         android:textColor="#434343"

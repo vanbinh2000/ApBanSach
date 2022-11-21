@@ -23,8 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import tdc.edu.vn.apbansach.R;
@@ -39,8 +42,8 @@ public class CartActivty extends AppCompatActivity {
     RecyclerViewAdapter_Cart recyclerViewAdapter_cart;
     FirebaseAuth mAuth;
     Button btnThanhtoan;
-    TextView tvThanhtien;
-    int amount =0;
+    TextView tvThanhtien, tvEmpty;
+    int amount = 0;
 
     DatabaseReference fbProducts;
 
@@ -56,40 +59,43 @@ public class CartActivty extends AppCompatActivity {
     }
 
     private void totalAmount() {
-
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference();
         DatabaseReference userID = reference.child("Cart").child(mAuth.getCurrentUser().getUid());
+        DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
         userID.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot productSnapshot : snapshot.getChildren()){
+                if (!snapshot.exists()) {
+                    tvEmpty.setVisibility(View.VISIBLE);
                     amount = 0;
-                    String productID = productSnapshot.getKey().trim();
-                    DatabaseReference productRef = reference.child("Products");
-                    productRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                if (dataSnapshot.getKey().equals(productID)) {
-                                    Products products = dataSnapshot.getValue(Products.class);
-                                    amount = amount + Integer.parseInt(products.getPrice().trim());
+                    tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
+                } else {
+                    for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                        amount = 0;
+                        String productID = productSnapshot.getKey().trim();
+                        DatabaseReference productRef = reference.child("Products");
+                        productRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    if (dataSnapshot.getKey().equals(productID)) {
+                                        Products products = dataSnapshot.getValue(Products.class);
+                                        amount = amount + Integer.parseInt(products.getPrice().trim());
+                                    }
+                                    tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
                                 }
                             }
-                            DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
-                            tvThanhtien.setText(decimalFormat.format(Integer.valueOf(amount)) + " Đ");
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -116,7 +122,6 @@ public class CartActivty extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
                                 if (dataSnapshot.getKey().equals(productsID)) {
                                     Products products = dataSnapshot.getValue(Products.class);
                                     productsArrayList.add(products);
@@ -137,8 +142,10 @@ public class CartActivty extends AppCompatActivity {
         };
         userID.addListenerForSingleValueEvent(valueEventListener);
     }
+
     private void setControl() {
         tvThanhtien = findViewById(R.id.tvThanhtien);
+        tvEmpty = findViewById(R.id.tvEmpty);
         btnThanhtoan = findViewById(R.id.btnThanhToan);
 
 
@@ -151,13 +158,13 @@ public class CartActivty extends AppCompatActivity {
               Intent intent = new Intent(CartActivty.this, Activity_payment.class);
               startActivity(intent);
 
-          }
-      });
+            }
+        });
 
     }
 
     private void nextDataActivity() {
-       Intent intent = new Intent(CartActivty.this, Activity_payment.class);
-       this.startActivity(intent);
+        Intent intent = new Intent(CartActivty.this, Activity_payment.class);
+        this.startActivity(intent);
     }
 }
